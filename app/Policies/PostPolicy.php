@@ -6,14 +6,16 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
+use function PHPUnit\Framework\returnSelf;
+
 class PostPolicy
 {
     /**
-     * Determine whether the user can view any models.
+     * Determine whether the user can view any models.  
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -21,7 +23,11 @@ class PostPolicy
      */
     public function view(User $user, Post $post): bool
     {
-        //
+
+                if($user->id == $post->user_id)
+                return true;
+            else 
+            return false;
     }
 
     /**
@@ -29,7 +35,7 @@ class PostPolicy
      */
     public function create(User $user): bool
     {
-        //
+       
     }
 
     /**
@@ -37,7 +43,7 @@ class PostPolicy
      */
     public function update(User $user, Post $post): bool
     {
-        //
+        return $user -> id == $post->user_id;
     }
 
     /**
@@ -45,7 +51,7 @@ class PostPolicy
      */
     public function delete(User $user, Post $post): bool
     {
-        //
+        return $user -> id == $post->user_id;
     }
 
     /**

@@ -28,13 +28,39 @@
     </head>
     <body class="font-sans antialiased">
         
-            @include('layouts.header')
-            @include('layouts.navigation')
+          
             <!-- Page Content -->
-            <main id="main" class="main">
-                {{ $slot }}
+            <main>
+                <div class="container">
+                    <div class="row my-5">
+                        <div class="col-12 mb-4">
+                            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                                <h4>Posts</h4>
+                                <div class="container-fluid justify-content-end">
+                                    <div>
+                                        <a href="{{ route('login') }}" class="btn btn-outline-primary">Login</a>
+                                        <a href="{{ route('register') }}" class="btn btn-outline-primary">Sign Up</a>
+                                    </div>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                    @isset($posts)
+                        @foreach ($posts as $post)
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{$post -> subject}}</h5>
+                                    <p><small><b>Author:</b>{{$post-> user->name}}</small></p>
+                                    {{$post -> post}}
+                                    <hr>
+                                    <p class="font-monospace"> For feedback you can email the author on  <a href="">{{$post->user->email}}</a></p>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endisset
+                </div>
             </main>
-            @include('layouts.footer')
+           
         <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
         <!-- Vendor JS Files -->
